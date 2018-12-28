@@ -3,8 +3,25 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;">
+   
+  </canvas>
+	<input type="checkbox" name="vehicle1" (click)="onSetArray($event)" value="Bike"> I have a bike<br>
+	<input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+	<input type="checkbox" (change)="isChangeLimitAccessToggle($event.target.checked ? 'on' : 'off')" name="vehicle3" value="Boat" id="ifLimitAccess" >i have a b
 </div>
+
+<div>
+	<input #pass1 type="password" placeholder="New Password" (keyup)="onKey()"/>
+	<div #show1 style="cursor:pointer;width:auto;" (click)="onShowPass1('1')">show</div>
+</div>
+<div>
+	<input #pass2 type="password" placeholder="Confirm Password" (keyup)="onKey()"/>
+	<div #show2 style="cursor:pointer;width:auto;" (click)="onShowPass1('2')">show</div>
+</div>
+
+<div #result ></div>
+<input #submit type="button" value="submit" (click)="onKey()" />
 <h2>Here are some links to help you start: </h2>
 <ul>
   <li>
@@ -17,5 +34,47 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul>
+
+
+<form action="http://johannesssp.com/testerAPI/api_upload.php" method="post" enctype="multipart/form-data">
+	<input type="radio" name="radiogroup" #radioYes value="Yes" (change)="onChangeRadio(radioYes.value)">Yes
+	<input type="radio" name="radiogroup" #radioNo value="No" (change)="onChangeRadio(radioNo.value)">No<br/>
+	<input type="text" #user name="user" /><br/>
+	<input type="file" #file name="file" /><br/>  
+	<input type="button" value="Isi dulu"   #btnSubmit name="submit" (click)="onSubmitForm()">
+</form>
+<table class="table table-header-rotated">
+  <thead>
+  <tr>
+	<th class="rotate"><div style="text-align: center"><span>Field</span></div></th>
+	<th class="rotate"><div style="text-align: center"><span>Mandatory</span></div></th>
+	<th class="rotate"><div style="text-align: center"><span>editable</span></div></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of item let i = index;">
+	<th class="row-header" style="padding: 10px">{{data.field}}</th>
+	<td>
+	  <input id="{{data.field}}-1" (change)="showUpdatedItem(data.field, '1',true)" [checked]="data.mandatory === true" class="radio-custom" value="true" name="{{data.field}}1" type="radio">
+	  <label for="{{data.field}}-1" class="radio-custom-label">YES</label>
+	  <input id="{{data.field}}-2" (change)="showUpdatedItem(data.field, '1',false)" [checked]="data.mandatory === false" class="radio-custom" value="false" name="{{data.field}}1" type="radio">
+	  <label for="{{data.field}}-2" class="radio-custom-label">NO</label>
+	</td>
+	<td>
+	  <input id="{{data.field}}-3" (change)="showUpdatedItem(data.field, '2',true)" [checked]="data.editable === true" class="radio-custom" value="true" name="{{data.field}}2" type="radio">
+	  <label for="{{data.field}}-3" class="radio-custom-label">YES</label>
+	  <input id="{{data.field}}-4" (change)="showUpdatedItem(data.field, '2',true)" [checked]="data.editable === false" class="radio-custom" value="false" name="{{data.field}}2" type="radio">
+	  <label for="{{data.field}}-4" class="radio-custom-label">NO</label>
+	</td>
+  </tr>
+  </tbody>
+</table>
+<button (click)="onSubmit()" style="width: 20%;background-color: #0F3578" type="button" class="btn btn-primary">Simpan</button>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 
 <router-outlet></router-outlet>
